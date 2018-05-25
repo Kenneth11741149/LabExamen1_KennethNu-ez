@@ -6,7 +6,11 @@
 package examen1;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -17,6 +21,9 @@ public class Principal extends javax.swing.JFrame{
     static boolean loggedin = false;
     static ArrayList<Usuario> Users = new ArrayList<Usuario>();
     static Usuario Actual = new Usuario();
+    static ArrayList<Clase> Clases = new ArrayList<Clase>();
+    
+    
     /**
      * Creates new form Principal
      */
@@ -65,8 +72,15 @@ public class Principal extends javax.swing.JFrame{
         button2 = new java.awt.Button();
         button3 = new java.awt.Button();
         jPanel2 = new javax.swing.JPanel();
+        TA_VISUALS = new java.awt.TextArea();
+        Tab_Visual = new java.awt.Label();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        TA_CommandPrompt = new java.awt.TextArea();
+        button4 = new java.awt.Button();
         jButton3 = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -175,6 +189,11 @@ public class Principal extends javax.swing.JFrame{
         TF_ProfileName.setMinimumSize(new java.awt.Dimension(60, 60));
 
         TF_ProfileAge.setMinimumSize(new java.awt.Dimension(60, 60));
+        TF_ProfileAge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TF_ProfileAgeActionPerformed(evt);
+            }
+        });
 
         TF_ProfileMail.setMinimumSize(new java.awt.Dimension(60, 60));
 
@@ -264,33 +283,103 @@ public class Principal extends javax.swing.JFrame{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Perfil", jPanel1);
+
+        Tab_Visual.setText("label12");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Atributo", "Metodo", "Clase"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(TA_VISUALS, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(Tab_Visual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(Tab_Visual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(TA_VISUALS, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Visualizar", jPanel2);
+
+        button4.setLabel("Start");
+        button4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button4MouseClicked(evt);
+            }
+        });
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(TA_CommandPrompt, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(TA_CommandPrompt, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ejecutar", jPanel3);
@@ -523,6 +612,73 @@ public class Principal extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_button3MouseClicked
 
+    private void TF_ProfileAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_ProfileAgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TF_ProfileAgeActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        // TODO add your handling code here:
+ 
+        
+            for(int i = 0; i < Clases.size(); i++){
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            Object[] nine = { Clases.get(i).getName(), Clases.get(i).getMetodos(), Clases.get(i).getAtributos(),"Hola"    };
+            modelo.addRow(nine);
+            jTable1.setModel(modelo);
+            ]
+            
+        
+        
+         String toPerform = TA_CommandPrompt.getText();
+         String[] Parseador = toPerform.split(" ");
+         if(Parseador[0].equals("Create")){
+             if(Parseador[1].equals("class")){
+                 Clase x = new Clase(Parseador[2]);
+                 TA_VISUALS.setText("Se ha creado la clase "+Parseador[2]);
+             }
+         }
+         
+         if(Parseador[0].equals("Modify")){
+             if(Parseador[1].equals("class")){
+                 for(int i = 0; i < Clases.size(); i++){
+                     if(Clases.get(i).getName().equals(Parseador[2])){
+                         Clases.get(i).setName(Parseador[5]);
+                     }
+                 }
+             }
+         }
+         
+         if(Parseador[0].equals("Delete")){
+             if(Parseador[1].equals("Class")){
+                 for(int i = 0; i < Clases.size(); i++){
+                     if( Clases.get(i).getName().equals(Parseador[2])){
+                         Clases.remove(i);
+                     }
+                 }
+             }
+         }
+         
+         
+         
+         TA_CommandPrompt.setText("");
+         
+         
+         
+         
+    }//GEN-LAST:event_button4ActionPerformed
+
+    private void button4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseClicked
+        // TODO add your handling code here:
+        for(int i = 0; i < Users.size(); i++){
+            
+            
+            
+            
+        }
+        
+        
+    }//GEN-LAST:event_button4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -561,6 +717,8 @@ public class Principal extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_Register;
     private java.awt.Label Correo;
+    private java.awt.TextArea TA_CommandPrompt;
+    private java.awt.TextArea TA_VISUALS;
     private java.awt.TextField TF_AGE;
     private java.awt.TextField TF_ComplName;
     private java.awt.TextField TF_Email;
@@ -573,9 +731,11 @@ public class Principal extends javax.swing.JFrame{
     private java.awt.TextField TF_ProfileUsername;
     private java.awt.TextField TF_Username;
     private javax.swing.JTextField TF_UsernameEntry;
+    private java.awt.Label Tab_Visual;
     private java.awt.Button button1;
     private java.awt.Button button2;
     private java.awt.Button button3;
+    private java.awt.Button button4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -583,7 +743,10 @@ public class Principal extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JDialog jd_logeado;
     private javax.swing.JDialog jd_registrar;
     private java.awt.Label label1;
