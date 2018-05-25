@@ -3,8 +3,43 @@ package examen1;
 
 public class Usuario {
     private String nombre;
-    private String edad;
+    private int edad;
     private String correo;
     private String username;
     private String password;
+
+    public Usuario() {
+    }
+
+    public Usuario(String nombre, int edad, String correo, String username, String password) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.correo = correo;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
+    
+    
+    
 }
