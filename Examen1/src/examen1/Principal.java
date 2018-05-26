@@ -631,7 +631,7 @@ public class Principal extends javax.swing.JFrame{
          
          if(Parseador[0].equals("Modify")){
              if(Parseador[1].equals("Atribute")){
-                 if(Parseador[2].equals){
+                 if(Parseador[2].equals("from")){
                      
                  }
              }
