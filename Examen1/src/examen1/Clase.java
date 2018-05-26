@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Clase {
     private String name;
-    private ArrayList<String> Atributos = new ArrayList<String>();
-    private ArrayList<String> Metodos = new ArrayList<String>();
+    private ArrayList<String> Atributos = new ArrayList();
+    private ArrayList<String> Metodos = new ArrayList();
 
     public Clase(String name) {
         this.name = name;
@@ -19,21 +19,23 @@ public class Clase {
         return Atributos;
     }
 
+    public void setAtributos(ArrayList<String> Atributos) {
+        this.Atributos = Atributos;
+    }
+
     public ArrayList<String> getMetodos() {
         return Metodos;
     }
+
+    public void setMetodos(ArrayList<String> Metodos) {
+        this.Metodos = Metodos;
+    }
+
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setAtributos(ArrayList<Atributo> Atributos) {
-        this.Atributos = Atributos;
-    }
-
-    public void setMetodos(ArrayList<Metodo> Metodos) {
-        this.Metodos = Metodos;
-    }
 
     @Override
     public String toString() {

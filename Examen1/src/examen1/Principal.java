@@ -73,9 +73,7 @@ public class Principal extends javax.swing.JFrame{
         button3 = new java.awt.Button();
         jPanel2 = new javax.swing.JPanel();
         TA_VISUALS = new java.awt.TextArea();
-        Tab_Visual = new java.awt.Label();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        VISUALTEXTAREA = new java.awt.TextArea();
         jPanel3 = new javax.swing.JPanel();
         TA_CommandPrompt = new java.awt.TextArea();
         button4 = new java.awt.Button();
@@ -288,58 +286,23 @@ public class Principal extends javax.swing.JFrame{
 
         jTabbedPane1.addTab("Perfil", jPanel1);
 
-        Tab_Visual.setText("label12");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Atributo", "Metodo", "Clase"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable1);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(TA_VISUALS, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(VISUALTEXTAREA, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                    .addComponent(TA_VISUALS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(Tab_Visual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                .addComponent(Tab_Visual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(VISUALTEXTAREA, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(TA_VISUALS, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -618,15 +581,7 @@ public class Principal extends javax.swing.JFrame{
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // TODO add your handling code here:
- 
-        
-            for(int i = 0; i < Clases.size(); i++){
-            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            Object[] nine = { Clases.get(i).getName(), Clases.get(i).getMetodos(), Clases.get(i).getAtributos(),"Hola"    };
-            modelo.addRow(nine);
-            jTable1.setModel(modelo);
-            ]
-            
+
         
         
          String toPerform = TA_CommandPrompt.getText();
@@ -634,6 +589,7 @@ public class Principal extends javax.swing.JFrame{
          if(Parseador[0].equals("Create")){
              if(Parseador[1].equals("class")){
                  Clase x = new Clase(Parseador[2]);
+                 Clases.add(x);
                  TA_VISUALS.setText("Se ha creado la clase "+Parseador[2]);
              }
          }
@@ -643,6 +599,7 @@ public class Principal extends javax.swing.JFrame{
                  for(int i = 0; i < Clases.size(); i++){
                      if(Clases.get(i).getName().equals(Parseador[2])){
                          Clases.get(i).setName(Parseador[5]);
+                         TA_VISUALS.setText("Se ha modificado la clase "+Parseador[2]+ "a"+Parseador[5]);
                      }
                  }
              }
@@ -653,29 +610,54 @@ public class Principal extends javax.swing.JFrame{
                  for(int i = 0; i < Clases.size(); i++){
                      if( Clases.get(i).getName().equals(Parseador[2])){
                          Clases.remove(i);
+                         TA_VISUALS.setText("Se ha eliminado la clase "+Parseador[2]);
                      }
+                 }
+             }
+         }
+         
+         if(Parseador[0].equals("Add")){
+             if(Parseador[1].equals("Atribute")){
+                 if(Parseador[2].equals("to")){
+                     for(int i = 0; i < Clases.size(); i++){
+                         if( Clases.get(i).getName().equals(Parseador[3]) ){
+                             Clases.get(i).getAtributos().add(Parseador[4]);
+                             TA_VISUALS.setText("Se ha agregado el atributo"+Parseador[4]+"a la clase "+Parseador[3]);
+                         }
+                     }
+                 }
+             }
+         }
+         
+         if(Parseador[0].equals("Modify")){
+             if(Parseador[1].equals("Atribute")){
+                 if(Parseador[2].equals){
+                     
                  }
              }
          }
          
          
          
+         
          TA_CommandPrompt.setText("");
          
-         
+         for(int i = 0 ; i < Clases.size(); i++ ){
+            System.out.println("Hola");
+            
+            String x = Clases.get(i).toString();
+            VISUALTEXTAREA.append(x);
+            
+            
+        }
+        
          
          
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseClicked
         // TODO add your handling code here:
-        for(int i = 0; i < Users.size(); i++){
-            
-            
-            
-            
-        }
-        
+       
         
     }//GEN-LAST:event_button4MouseClicked
 
@@ -731,7 +713,7 @@ public class Principal extends javax.swing.JFrame{
     private java.awt.TextField TF_ProfileUsername;
     private java.awt.TextField TF_Username;
     private javax.swing.JTextField TF_UsernameEntry;
-    private java.awt.Label Tab_Visual;
+    private java.awt.TextArea VISUALTEXTAREA;
     private java.awt.Button button1;
     private java.awt.Button button2;
     private java.awt.Button button3;
@@ -743,10 +725,8 @@ public class Principal extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JDialog jd_logeado;
     private javax.swing.JDialog jd_registrar;
     private java.awt.Label label1;
